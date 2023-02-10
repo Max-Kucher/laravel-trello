@@ -1,7 +1,9 @@
 require('./bootstrap');
 
-import * as Vue from 'vue'
+import { createApp } from 'vue'
+import App from './components/App.vue'
 
-const app = new Vue({
-    el: '#app',
-});
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap"
+
+const app = createApp(App).mount('#app')
