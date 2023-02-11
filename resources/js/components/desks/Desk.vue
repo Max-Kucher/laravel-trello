@@ -3,7 +3,7 @@
         <div class="row">
             <h1 class="col-12 mt-3 mb-5">Доски</h1>
 
-            <div class="col-lg-4 col-md-6 col-sm-12 mb-3" v-for="desk in desks">
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-3" v-if="desks.length" v-for="desk in desks">
                 <div class="card text-bg-dark">
 <!--                    <img src="https://images.all-free-download.com/images/graphiclarge/camera_test_apple_563728.jpg" class="card-img-top" alt="Яблоки">-->
                     <div class="card-header">{{ desk.desk_name }}</div>

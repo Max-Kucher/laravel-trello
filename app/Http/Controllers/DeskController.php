@@ -6,6 +6,7 @@ use App\Http\Resources\DeskResource;
 use App\Models\Desk;
 use App\Models\DeskList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DeskController extends Controller
 {
@@ -71,11 +72,16 @@ class DeskController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Desk  $desk
-     * @return \Illuminate\Http\Response
+     * @return DeskResource
      */
     public function update(Request $request, Desk $desk)
     {
-        //
+        $desk->update($request->validate([
+            'desk_name' => ['required', 'max:255'],
+            'desk_description' => [],
+        ]));
+
+        return new DeskResource($desk);
     }
 
     /**
