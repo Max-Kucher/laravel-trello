@@ -7,9 +7,10 @@ import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 import App from './components/App.vue'
-import About from './components/About.vue'
+import Home from './components/Home.vue'
+import Desc from './components/descs/Desc.vue'
 
-const app = createApp({});
+const app = createApp(App);
 
 const router = new createRouter({
     history: createWebHistory(),
@@ -18,13 +19,13 @@ const router = new createRouter({
         {
             path: '/',
             name: 'index',
-            component: App,
+            component: Home,
         },
 
         {
-            path: '/about-us',
-            name: 'about',
-            component: About,
+            path: '/desks',
+            name: 'desks',
+            component: Desc,
         },
     ],
 });
