@@ -23251,12 +23251,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      desks: []
+      desks: [],
+      error: false,
+      loading: true
     };
   },
   mounted: function mounted() {
+    var _this = this;
     axios.get('api/v1/desks').then(function (response) {
-      console.log(response);
+      if (response.data !== undefined && response.data !== null && response.data.data !== undefined && response.data.data !== null) {
+        _this.desks = response.data.data;
+      }
+    })["catch"](function (err) {
+      console.log(err);
+      _this.error = true;
+    })["finally"](function () {
+      _this.loading = false;
     });
   }
 });
@@ -23292,7 +23302,7 @@ var _hoisted_4 = {
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   "class": "navbar-brand",
   href: "#"
-}, "Navbar", -1 /* HOISTED */);
+}, "Меню", -1 /* HOISTED */);
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "navbar-toggler",
   type: "button",
@@ -23328,7 +23338,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "exact-active-class": "active"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Home")];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Главная")];
     }),
     _: 1 /* STABLE */
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
@@ -23339,7 +23349,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "exact-active-class": "active"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("desks")];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Доски")];
     }),
     _: 1 /* STABLE */
   })])])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)], 64 /* STABLE_FRAGMENT */);
@@ -23391,10 +23401,64 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "container"
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row\"><h1 class=\"col-12 mt-3 mb-5\">Доски</h1><div class=\"col-lg-4 col-md-6 col-sm-12 mb-3\"><div class=\"card\"><!--                    &lt;img src=&quot;https://images.all-free-download.com/images/graphiclarge/camera_test_apple_563728.jpg&quot; class=&quot;card-img-top&quot; alt=&quot;Яблоки&quot;&gt;--><div class=\"card-header\">Card title</div><!--                    &lt;ul class=&quot;list-group list-group-flush&quot;&gt;--><!--                        &lt;li class=&quot;list-group-item&quot;&gt;An item&lt;/li&gt;--><!--                        &lt;li class=&quot;list-group-item&quot;&gt;A second item&lt;/li&gt;--><!--                        &lt;li class=&quot;list-group-item&quot;&gt;A third item&lt;/li&gt;--><!--                    &lt;/ul&gt;--><div class=\"card-body\"><a href=\"#\" class=\"card-link\">Card link</a><a href=\"#\" class=\"card-link\">Another link</a></div></div></div><!--            &lt;div class=&quot;col-lg-4 col-md-6 col-sm-12&quot;&gt;2&lt;/div&gt;--><!--            &lt;div class=&quot;col-lg-4 col-md-6 col-sm-12&quot;&gt;3&lt;/div&gt;--><!--            &lt;div class=&quot;col-lg-4 col-md-6 col-sm-12&quot;&gt;4&lt;/div&gt;--></div>", 1);
-var _hoisted_3 = [_hoisted_2];
+var _hoisted_2 = {
+  "class": "row"
+};
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+  "class": "col-12 mt-3 mb-5"
+}, "Доски", -1 /* HOISTED */);
+var _hoisted_4 = {
+  "class": "col-lg-4 col-md-6 col-sm-12 mb-3"
+};
+var _hoisted_5 = {
+  "class": "card text-bg-dark"
+};
+var _hoisted_6 = {
+  "class": "card-header"
+};
+var _hoisted_7 = {
+  key: 0,
+  "class": "card-body"
+};
+var _hoisted_8 = {
+  "class": "card-text"
+};
+var _hoisted_9 = {
+  key: 1,
+  "class": "list-group list-group-flush mt-2"
+};
+var _hoisted_10 = {
+  "class": "list-group-item"
+};
+var _hoisted_11 = {
+  key: 0,
+  "class": "col-lg-4 col-md-6 col-sm-12 mb-3"
+};
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card text-bg-dark"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-header"
+}, "Загрузка..."), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "card-body"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <div class=\"spinner-grow text-dark\" role=\"status\">"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <span class=\"visually-hidden\">Loading...</span>"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        </div>")])], -1 /* HOISTED */);
+var _hoisted_13 = [_hoisted_12];
+var _hoisted_14 = {
+  key: 1,
+  "class": "alert alert-danger",
+  role: "alert"
+};
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+  "class": "alert-heading"
+}, "Ошибка!", -1 /* HOISTED */);
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, "Произошла ошибка при загрузке досок", -1 /* HOISTED */);
+var _hoisted_18 = [_hoisted_15, _hoisted_16, _hoisted_17];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_3);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.desks, function (desk) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <img src=\"https://images.all-free-download.com/images/graphiclarge/camera_test_apple_563728.jpg\" class=\"card-img-top\" alt=\"Яблоки\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(desk.desk_name), 1 /* TEXT */), desk.desk_description.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(desk.desk_description), 1 /* TEXT */)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), desk.desk_lists !== undefined && desk.desk_lists !== null && desk.desk_lists.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(desk.desk_lists, function (list_item) {
+      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(list_item.item_name), 1 /* TEXT */);
+    }), 256 /* UNKEYED_FRAGMENT */))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <div class=\"card-body\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <a href=\"#\" class=\"card-link\">Card link</a>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <a href=\"#\" class=\"card-link\">Another link</a>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </div>")])]);
+  }), 256 /* UNKEYED_FRAGMENT */)), $data.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, _hoisted_13)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $data.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, _hoisted_18)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
 }
 
 /***/ }),
