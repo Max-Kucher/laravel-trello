@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\DeskResource;
-use App\Models\Desc;
+use App\Models\Desk;
+use App\Models\DeskList;
 use Illuminate\Http\Request;
 
-class DescController extends Controller
+class DeskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +20,7 @@ class DescController extends Controller
 //         * @return \Illuminate\Http\Response
 //         */
 
-        $desks = Desc::paginate();
+        $desks = Desk::with('deskLists')->paginate();
 
         return DeskResource::collection($desks);
     }
@@ -48,10 +49,10 @@ class DescController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Desc  $desc
+     * @param  \App\Models\Desk  $desk
      * @return \Illuminate\Http\Response
      */
-    public function show(Desc $desc)
+    public function show(Desk $desk)
     {
         //
     }
@@ -59,10 +60,10 @@ class DescController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Desc  $desc
+     * @param  \App\Models\Desk  $desk
      * @return \Illuminate\Http\Response
      */
-    public function edit(Desc $desc)
+    public function edit(Desk $desk)
     {
         //
     }
@@ -71,10 +72,10 @@ class DescController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Desc  $desc
+     * @param  \App\Models\Desk  $desk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Desc $desc)
+    public function update(Request $request, Desk $desk)
     {
         //
     }
@@ -82,10 +83,10 @@ class DescController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Desc  $desc
+     * @param  \App\Models\Desk  $desk
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Desc $desc)
+    public function destroy(Desk $desk)
     {
         //
     }

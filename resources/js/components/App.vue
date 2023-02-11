@@ -14,7 +14,7 @@
                                 <router-link :to="{ name: 'index' }" class="nav-link" exact-active-class="active">Home</router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link :to="{ name: 'desks' }" class="nav-link" exact-active-class="active">Descs</router-link>
+                                <router-link :to="{ name: 'desks' }" class="nav-link" exact-active-class="active">desks</router-link>
                             </li>
                         </ul>
                     </div>

@@ -8,7 +8,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import App from './components/App.vue'
 import Home from './components/Home.vue'
-import Desc from './components/descs/Desc.vue'
+import Desk from './components/desks/Desk.vue'
 
 const app = createApp(App);
 
@@ -25,7 +25,7 @@ const router = new createRouter({
         {
             path: '/desks',
             name: 'desks',
-            component: Desc,
+            component: Desk,
         },
     ],
 });

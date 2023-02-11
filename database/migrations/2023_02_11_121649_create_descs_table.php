@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDescsTable extends Migration
+class CreatedesksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,25 @@ class CreateDescsTable extends Migration
      */
     public function up()
     {
-        Schema::create('descs', function (Blueprint $table) {
+        Schema::create('desks', function (Blueprint $table) {
             $table->id();
-            $table->string('desc_name');
-            $table->text('desc_description');
+            $table->string('desk_name');
+            $table->text('desk_description');
             $table->timestamps();
         });
 
-        Schema::create('desc_lists', function (Blueprint $table) {
+        Schema::create('desk_lists', function (Blueprint $table) {
             $table->id();
             $table->string('item_name');
             $table->text('item_description');
 
-            $table->bigInteger('desc_id')->unsigned();
+            $table->bigInteger('desk_id')->unsigned();
 
             $table->timestamps();
 
-            $table->foreign('desc_id')
+            $table->foreign('desk_id')
                 ->references('id')
-                ->on('descs')
+                ->on('desks')
                 ->onDelete('cascade');
         });
     }
@@ -43,7 +43,7 @@ class CreateDescsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('descs');
-        Schema::dropIfExists('desc_lists');
+        Schema::dropIfExists('desks');
+        Schema::dropIfExists('desk_lists');
     }
 }

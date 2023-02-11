@@ -35,7 +35,7 @@
             }
         },
         mounted() {
-            axios.get('api/v1/descs')
+            axios.get('api/v1/desks')
                 .then(response => {
                     console.log(response);
                 })

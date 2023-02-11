@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('v1/descs', \App\Http\Controllers\DescController::class);
+Route::resource('v1/desks', \App\Http\Controllers\DeskController::class);
