@@ -16,10 +16,6 @@ class DeskController extends Controller
      */
     public function index()
     {
-//        /**
-//         * @return \Illuminate\Http\Response
-//         */
-
         $desks = Desk::with('deskLists')->paginate();
 
         return DeskResource::collection($desks);
@@ -50,22 +46,24 @@ class DeskController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Desk  $desk
-     * @return \Illuminate\Http\Response
+     * @return DeskResource
      */
     public function show(Desk $desk)
     {
-        //
+        return new DeskResource($desk);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Desk  $desk
-     * @return \Illuminate\Http\Response
+     * @return DeskResource
      */
     public function edit(Desk $desk)
     {
-        //
+        $desk = $desk->load('deskLists');
+
+        return new DeskResource($desk);
     }
 
     /**

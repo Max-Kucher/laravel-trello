@@ -15,10 +15,12 @@
                             {{ list_item.item_name }}
                         </li>
                     </ul>
-<!--                    <div class="card-body">-->
+                    <div class="card-body">
+                        <router-link class="btn btn-primary" :to="{name: 'show-desk', params: {deskId: desk.id}}">Изменить</router-link>
+
 <!--                        <a href="#" class="card-link">Card link</a>-->
 <!--                        <a href="#" class="card-link">Another link</a>-->
-<!--                    </div>-->
+                    </div>
                 </div>
             </div>
 
@@ -26,9 +28,6 @@
                 <div class="card text-bg-dark">
                     <div class="card-header">Загрузка...</div>
                     <div class="card-body">
-<!--                        <div class="spinner-grow text-dark" role="status">-->
-<!--                            <span class="visually-hidden">Loading...</span>-->
-<!--                        </div>-->
                     </div>
                 </div>
             </div>
