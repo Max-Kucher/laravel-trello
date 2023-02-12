@@ -19,7 +19,7 @@
                         <router-link class="btn btn-primary" :to="{name: 'show-desk', params: {deskId: desk.id}}">Изменить</router-link>
 
                         <div class="btn-group" role="group">
-                            <button :data-desk-id="desk.id" @click="deleteDesk" class="btn btn-outline-danger">
+                            <button :data-desk-id="desk.id" @click="deleteDesk(desk.id)" class="btn btn-outline-danger">
                                 <i class="bi bi-trash3"></i>
                                 <span class="visually-hidden">Удалить</span>
                             </button>
@@ -87,7 +87,7 @@
                         delete desk.desk_lists[list_item].desk_id;
                     }
 
-                    axios.post('/api/v1/desks/', desk)
+                    confirm('Доска будет клонирована. Продолжить?') && axios.post('/api/v1/desks/', desk)
                         .then(response => {
                             this.desks.push(response.data.data);
                         }).catch(err => {
@@ -95,24 +95,20 @@
                     });
                 }
             },
-            deleteDesk: function($event) {
-                let desk = find_target_desk_by_event.apply(this, [$event]);
+            deleteDesk: function(desk_id) {
+                confirm('Вы действительно хотите удалить эту доску?') && axios.delete('/api/v1/desks/' + desk_id)
+                    .then(response => {
+                        if ([200, 202, 204].includes(response.status)) {
 
-                if (desk !== null && desk.id !== undefined) {
-                    axios.delete('/api/v1/desks/' + desk.id)
-                        .then(response => {
-                            if ([200, 202, 204].includes(response.status)) {
-
-                                for (let index in this.desks) {
-                                    if (this.desks[index].id === desk.id) {
-                                        this.desks.splice(index, 1);
-                                    }
+                            for (let index in this.desks) {
+                                if (this.desks[index].id === desk_id) {
+                                    this.desks.splice(index, 1);
                                 }
                             }
-                        }).catch(err => {
-                            console.log(err);
-                    });
-                }
+                        }
+                    }).catch(err => {
+                        console.log(err);
+                });
             },
         },
     }

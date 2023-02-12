@@ -25498,29 +25498,26 @@ __webpack_require__.r(__webpack_exports__);
           delete desk.desk_lists[list_item].id;
           delete desk.desk_lists[list_item].desk_id;
         }
-        axios.post('/api/v1/desks/', desk).then(function (response) {
+        confirm('Доска будет клонирована. Продолжить?') && axios.post('/api/v1/desks/', desk).then(function (response) {
           _this2.desks.push(response.data.data);
         })["catch"](function (err) {
           console.log(err);
         });
       }
     },
-    deleteDesk: function deleteDesk($event) {
+    deleteDesk: function deleteDesk(desk_id) {
       var _this3 = this;
-      var desk = find_target_desk_by_event.apply(this, [$event]);
-      if (desk !== null && desk.id !== undefined) {
-        axios["delete"]('/api/v1/desks/' + desk.id).then(function (response) {
-          if ([200, 202, 204].includes(response.status)) {
-            for (var index in _this3.desks) {
-              if (_this3.desks[index].id === desk.id) {
-                _this3.desks.splice(index, 1);
-              }
+      confirm('Вы действительно хотите удалить эту доску?') && axios["delete"]('/api/v1/desks/' + desk_id).then(function (response) {
+        if ([200, 202, 204].includes(response.status)) {
+          for (var index in _this3.desks) {
+            if (_this3.desks[index].id === desk_id) {
+              _this3.desks.splice(index, 1);
             }
           }
-        })["catch"](function (err) {
-          console.log(err);
-        });
-      }
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }
 });
@@ -25800,7 +25797,7 @@ var _hoisted_12 = {
   "class": "btn-group",
   role: "group"
 };
-var _hoisted_13 = ["data-desk-id"];
+var _hoisted_13 = ["data-desk-id", "onClick"];
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "bi bi-trash3"
 }, null, -1 /* HOISTED */);
@@ -25861,13 +25858,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       _: 2 /* DYNAMIC */
     }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["to"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "data-desk-id": desk.id,
-      onClick: _cache[0] || (_cache[0] = function () {
-        return $options.deleteDesk && $options.deleteDesk.apply($options, arguments);
-      }),
+      onClick: function onClick($event) {
+        return $options.deleteDesk(desk.id);
+      },
       "class": "btn btn-outline-danger"
     }, _hoisted_16, 8 /* PROPS */, _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "data-desk-id": desk.id,
-      onClick: _cache[1] || (_cache[1] = function () {
+      onClick: _cache[0] || (_cache[0] = function () {
         return $options.cloneDesk && $options.cloneDesk.apply($options, arguments);
       }),
       "class": "btn btn-outline-secondary"
