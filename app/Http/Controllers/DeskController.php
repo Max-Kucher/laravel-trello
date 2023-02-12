@@ -36,11 +36,38 @@ class DeskController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|DeskResource
      */
     public function store(Request $request)
     {
-        //
+        $desk = new Desk($request->validate([
+            'desk_name' => ['required', 'max:255'],
+            'desk_description' => [],
+        ]));
+
+        $desk_created = $desk->save();
+
+        if ($desk_created) {
+            if (!empty($request['desk_lists'])) {
+                foreach ($request['desk_lists'] as $desk_list_data) {
+                    $desk_list = new DeskList(array_merge($desk_list_data, [
+                        'desk_id' => $desk->id ?? null,
+                        'item_description' => $desk_list_data['item_description'] ?? '',
+                    ]));
+
+                    $desk_list->save();
+                }
+            }
+
+            /**
+             * Get eloquent relations from database
+             */
+            return new DeskResource($desk->load('deskLists'));
+
+//            return new DeskResource(Desk::where('id', $desk->id)->first()->load('deskLists'));
+        } else {
+            return response('An error occurred while processing request', 403);
+        }
     }
 
     /**
@@ -92,6 +119,8 @@ class DeskController extends Controller
      */
     public function destroy(Desk $desk)
     {
-        //
+        $desk->delete();
+
+        return response('', 204);
     }
 }

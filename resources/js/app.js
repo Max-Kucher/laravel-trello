@@ -1,15 +1,16 @@
 require('./bootstrap');
 
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap"
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
-import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createApp } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router';
 
-import App from './components/App.vue'
-import Home from './components/Home.vue'
-import Desk from './components/desks/Desk.vue'
-import ShowDesk from './components/desks/ShowDesk.vue'
+import App from './components/App.vue';
+import Home from './components/Home.vue';
+import Desk from './components/desks/Desk.vue';
+import ShowDesk from './components/desks/ShowDesk.vue';
 
 const app = createApp(App);
 
@@ -36,6 +37,6 @@ const router = new createRouter({
     ],
 });
 
-app.use(router)
+app.use(router);
 
-app.mount('#app')
+app.mount('#app');
