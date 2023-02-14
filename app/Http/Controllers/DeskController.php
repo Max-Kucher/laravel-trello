@@ -63,8 +63,6 @@ class DeskController extends Controller
              * Get eloquent relations from database
              */
             return new DeskResource($desk->load('deskLists'));
-
-//            return new DeskResource(Desk::where('id', $desk->id)->first()->load('deskLists'));
         } else {
             return response('An error occurred while processing request', 403);
         }

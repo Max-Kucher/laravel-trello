@@ -5,14 +5,27 @@
 
             <div class="col-lg-4 col-md-6 col-sm-12 mb-3" v-if="desks.length" v-for="desk in desks">
                 <div class="card text-bg-dark">
-<!--                    <img src="https://images.all-free-download.com/images/graphiclarge/camera_test_apple_563728.jpg" class="card-img-top" alt="Яблоки">-->
                     <div class="card-header">{{ desk.desk_name }}</div>
                     <div class="card-body" v-if="desk.desk_description !== undefined && desk.desk_description.length">
                         <p class="card-text">{{ desk.desk_description }}</p>
                     </div>
-                    <ul class="list-group list-group-flush mt-2" v-if="desk.desk_lists !== undefined && desk.desk_lists !== null && desk.desk_lists.length">
-                        <li class="list-group-item" v-for="list_item in desk.desk_lists">
+                    <ul class="list-group list-group-flush mt-2">
+                        <li class="list-group-item"
+                            v-if="desk.desk_lists !== undefined && desk.desk_lists !== null && desk.desk_lists.length"
+                            v-for="list_item in desk.desk_lists"
+                        >
                             {{ list_item.item_name }}
+                        </li>
+                        <li class="list-group-item">
+                            <div class="input-group">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Добавить пункт задачи..."
+                                >
+                                <button class="btn btn-outline-secondary"
+                                        onclick="alert('Не робыть пока!')"
+                                        type="button">Добавить</button>
+                            </div>
                         </li>
                     </ul>
                     <div class="card-body d-flex justify-content-between align-items-center">
@@ -31,6 +44,8 @@
                     </div>
                 </div>
             </div>
+
+            <NewDesk @ondeskcreated="addDeskData"></NewDesk>
 
             <div class="col-lg-4 col-md-6 col-sm-12 mb-3" v-if="loading">
                 <div class="card text-bg-dark">
@@ -53,8 +68,12 @@
 
 <script>
     import {  } from 'vue';
+    import NewDesk from "./NewDesk.vue";
 
     export default {
+        components: {
+            NewDesk
+        },
         data() {
             return {
                 desks: [],
@@ -89,7 +108,7 @@
 
                     confirm('Доска будет клонирована. Продолжить?') && axios.post('/api/v1/desks/', desk)
                         .then(response => {
-                            this.desks.push(response.data.data);
+                            this.addDeskData(response.data.data);
                         }).catch(err => {
                             console.log(err);
                     });
@@ -109,6 +128,9 @@
                     }).catch(err => {
                         console.log(err);
                 });
+            },
+            addDeskData: function (desk) {
+                this.desks.push(desk);
             },
         },
     }

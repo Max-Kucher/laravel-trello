@@ -16,7 +16,7 @@
                        placeholder="Название доски"
                        aria-label="Название доски"
                        required
-                       @keyup.stop.prevent="v$.desk.desk_name.$touch"
+                       @input.stop.prevent="v$.desk.desk_name.$touch"
                        @blur="validate"
                 >
 
@@ -100,7 +100,7 @@ export default {
 
             axios.patch('/api/v1/desks/' + this.deskId, desk_data)
                 .then(response => {
-                console.log(response);
+                    console.log(response);
             });
         },
     },
